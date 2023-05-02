@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeoFi</title>
+    <link rel="icon" type="image/png" href="https://neofi.app/static/img/favicon.ico" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <!-- Unicons CSS -->
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" />
+    <!-- Jquery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <!-- FOntawesome CDN -->
+  <link rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+
+  <style>
+
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+    
+    /* Modal Content */
+    .modal-content {
+      background-color: #151515;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 34%;
+      color: #fff;
+    }
+    
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    .inputwrapper2:after {
+  height: 0;
+  width: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #777;
+  transform: origin(50% 20%);
+  transition: all 0.125s ease-in-out;
+  content: "";
+  display: block;
+  margin-top: -2px;
+  pointer-events: none;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+}
+.inputwrapper2.open:after {
+  -webkit-transform: rotate(-180deg);
+  transform: rotate(-180deg);
+}
+.inputwrapper2.open .list {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+
+
+.dd-search {
+  width: 100%;
+  height: 50px;
+  overflow: hidden;
+  border: 1px solid rgba(110, 86, 248, 0.25);
+  border-radius: 30px;
+  padding: 0px 20px 0px 20px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 28px;
+}
+.dd-searchbox {
+  width: 90%;
+  padding: 0.5rem;
+  background-color: #181627;
+  border: none;
+  outline: none;
+  color: #bbb;
+  font-size: 18px;
+}
+.dropdown-select > span{
+  font-size: 18px;
+  color: #D2D2D2;
+}
+.dropdown-select > input::p
+.dropdown-select > input::placeholder{
+  font-weight: 400;
+  font-size: 14px;
+  color: #D2D2D2;
+}
+
+
+/* #spinner   {  
+           
+        animation: spin 1s linear infinite;
+        color: red;
+    }
+      
+    @keyframes spin {
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+         
+.inline{
+   display: flex;
+}
+.center{
+   flex:left;
+}
+.spinner i{
+   margin-top: 10px;
+   margin-left: 50px;
+
+   
+} */
+
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.loader {
+  display: none;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+}
+
+.loading {
+  border: 2px solid #ccc;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border-top-color: #1ecd97;
+  border-left-color: #1ecd97;
+  animation: spin 1s infinite ease-in;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+    </style>
+</head>
+
+<body>
+  <!-- <p class="spinner" id="spinner"><i class="fa fa-spinner fa-5x"></i></p> -->
+  <div class="loader">
+    <div class="loading">
+    </div>
+  </div>
+    <nav class="nav">
+        <a href="#" class="logo"><img src="/images/logo.png" alt="Logo" width="128px" height="46px"></a>
+        <i class="uil uil-bars navOpenBtn"></i>
+        <ul class="nav-links">
+            <i class="uil uil-times navCloseBtn"></i>
+            <li><a href="#" class="active">Trade</a></li>
+            <li><a href="#">Earn</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <button>Connect wallet</button>
+    </nav>
+
+    <div class="main_page">
+        <div class="card">
+            <div class="logo-container">
+                <img src="images/ethusdt.png" class="ticker_img" alt="Logo">
+            </div>
+            <div class="card-body">
+                <div class="currentValue">
+                    <h4>Current value</h4>
+                    <h3><span>&#8377;</span> <span id="stock-price"></span></h3>
+                </div>
+
+                <div class="inputwrapper2" data-required="(required)">
+                  <img src="images/ethusdt.png" class="ticker_img" alt="Logo" style="position: absolute;top: 30%;left: 3%;width: 5%;"> <input type="text" value="Ethereum" class="inputDataText" id="myBtn"  style="color: #fff;font-size: 20px;cursor: pointer;text-align:center;">
+                </div>
+            
+                <label for="investAmount" class="investAmount">Amount you want to invest</label>
+                <div class="inputwrapper" data-required="(required)">
+                    <input type="text" value="" class="inputDataText" id="invest_AMT" placeholder="0.00" style="color: #fff;font-size: 20px;">
+                </div>
+                <label for="estimateNum">Estimate Number of <span id="ticker_short_code"></span> You will Get</label>
+                <input type="text" value="" class="inputDataText estimateNum" id="converted_ticker" placeholder="0.00" style="color: #fff;font-size: 20px;">
+                <button class="buttonBuy">Buy</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <div class="main dropdown">
+            <div class="dd-search"><span class="material-symbols-outlined">search</span><input id="txtSearchValue" autocomplete="off" onkeyup="filter()" class="dd-searchbox" placeholder="Search chains" type="text"></div>
+            <ul style="list-style-type: none;">
+              <li  style="cursor:pointer;"  class="onclick_ticker_name" data-id1="ethusdt" data-id2="ETH" data-id3="Ethereum" value="1"> <img style="width: 4%;" src="images/ethusdt.png" /> Ethereum <span style="float: right;color: green;" class="material-symbols-outlined">check</span> </li> 
+              <li style="cursor:pointer;"  class="onclick_ticker_name" data-id1="btcusdt" data-id2="BTC" data-id3="Bitcoin" value="2"> <img style="width: 4%;" src="images/btcusdt.png" /> Bitcoin</li>
+              <li style="cursor:pointer;"  class="onclick_ticker_name" data-id1="tusdusdt" data-id2="TUSD" data-id3="TrueUSD" value="3"> <img style="width: 4%;" src="images/tusdusdt.png" /> TrueUSD</li>
+              <li style="cursor:pointer;"  class="onclick_ticker_name" data-id1="busdusdt" data-id2="BUSD" data-id3="BUSD" value="4"> <img style="width: 4%;" src="images/busdusdt.png" /> BUSD</li>
+            </ul>
+        </div>
+        </div>
+
+      
+    </div>
+
+    <!-- <script src="./script.js"></script> -->
+    <script src="app.js"></script>
+
+
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+
+  
+
+</script>
+
+</body>
+
+</html>
